@@ -24,7 +24,7 @@
         article.content = $("#content").val()
         $.ajax({
             method: "POST",
-            url: '/new_article',
+            url: '/submit',
             data: article
         }).done(function(response){
             console.log(response)

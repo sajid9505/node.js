@@ -19,7 +19,9 @@
   "homepage": "https://github.com/sajid9505/node.js#readme",
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1"
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "nodeman": "^1.1.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
