@@ -5,9 +5,33 @@ var server = http.Server(app);
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended:true}))
 
+var mongo = require('mongodb')
+
+var db, uri = "mongodb+srv://sajid9505:12345@cluster0-ebrcf.mongodb.net/test?retryWrites=true&w=majority"
+
+mongo.MongoClient.connect(uri, 
+  {useNewUrlParser: true, useUnifiedTopology: true},
+  function(err, client){
+    if(err){
+      console.log('Could not connect to MongoDB')
+    }else{
+      db = client.db('node-cw9')
+    }
+  })
+
+  var save = function(form_data){
+    db.createCollection('articles', function(err, collection){
+      var collection = db.collection('articles')
+      collection.save(form_data)
+    })
+
+
+  }
+
 let articles= []
 
 app.post('/submit', function(request,response){
+  save(request.body)
   articles.push(request.body)
   console.log(articles)
   response.json({msg: "successfully received"})
