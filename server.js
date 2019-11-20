@@ -11,44 +11,41 @@ var mongoose = require('mongoose')
 
 var db, uri = "mongodb+srv://sajid9505:12345@cluster0-ebrcf.mongodb.net/test?retryWrites=true&w=majority"
 
-mongoose.connect(uri,
-  {useNewUrlParser:true, useUnifiedTopology: true})
+mongoose.connect(uri, 
+  {useNewUrlParser:true, useUnifiedTopology: true })
 mongoose.connection.on('error', function(err){
-    console.log('Could not connect to mongoDB')
-  })
-
+  console.log('Could not connect to MongoDB')
+})
 
 
 
 // mongo.MongoClient.connect(uri, 
-//   {useNewUrlParser: true, useUnifiedTopology: true},
-//   function(err, client){
-//     if(err){
-//       console.log('Could not connect to MongoDB')
-//     }else{
-//       db = client.db('node-cw9')
-//     }
-//   })
+//     {useNewUrlParser:true, useUnifiedTopology: true }, 
+//     function(err, client){
+//         if(err){
+//             console.log('Could not connect to MongoDB')
+//         }else{
+//             db = client.db('node-cw9')
+//         }
+//     })
 
-  // var save = function(form_data){
-  //   db.createCollection('articles', function(err, collection){
-  //     var collection = db.collection('articles')
-  //     collection.save(form_data)
-  //   })
+//  var save = function(form_data){
+//     db.createCollection('articles', function(err, collection){})
+//     var collection = db.collection('articles')
+//     collection.save(form_data)
+// }  
 
 
 
 app.use(bodyParser.urlencoded({extended:true}))
 require('./routes/article.routes')(app)
+let articles = []
 
-let articles= []
-
-
-
-app.get('/',function(request,response){
+app.get('/', function(request, response){
   response.sendFile(__dirname+'/views/index.html')
 })
-app.get('/second',function(request,response){
+
+app.get('/second', function(request, response){
   response.sendFile(__dirname+'/views/second.html')
 })
 
